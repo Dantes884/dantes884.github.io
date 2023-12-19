@@ -1,0 +1,28 @@
+{% include 'header.html' %}
+<center>
+    <br>
+    <hr>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{object.title}}</h5>
+            <img src="{{object.image.url}}" alt="" width="200" height="200">
+            <p class="card-text">{{object.description}}</p>
+            <p class="card-link">
+                Режиссёр: {{object.director.name}}
+            </p>
+             <p class="card-link">
+                Рейтинг: {{object.rating.rating}}
+            </p>
+            <p class="card-link">
+                Жанры: {% for genre in object.genre.all %}{{ genre.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            </p>
+            <button><a href="/movies/{{object.id}}/change/">Изменить фильм</a></button>
+            <button><a href="/movies/{{object.id}}/delete/">Удалить фильм</a></button>
+        </div>
+    </div>
+    <br>
+    <hr>
+</center>
+
+
+{% include 'footer.html' %}

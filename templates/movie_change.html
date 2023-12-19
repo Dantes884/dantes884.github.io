@@ -1,0 +1,10 @@
+{% include 'header.html' %}
+<center>
+  <h1>Изменить данные о фильме</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="изменить данные о фильме">
+  </form>
+</center>
+{% include 'footer.html' %}

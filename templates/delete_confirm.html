@@ -1,0 +1,10 @@
+{% include 'header.html' %}
+<center>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Уверены в удалении?</h2>
+        <button type="submit">Да!</button>
+        <button><a href="/movies/" style="text-decoration: none; color: black">Нет</a> </button>
+    </form>
+</center>
+{% include 'footer.html' %}

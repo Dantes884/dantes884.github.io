@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from decouple import config
 
@@ -18,7 +19,8 @@ ALLOWED_HOSTS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    # Url for CORS
+    'http://localhost:3000',
+    'http://localhost:8000',
 ]
 
 CORS_ALLOWED_METHODS = ['POST', 'GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
@@ -36,12 +38,15 @@ DJANGO_APPS = [
 
 OTHER_APPS = [
     'rest_framework',
-    'rest_framework_simplejwt',
     'corsheaders',
+    'drf_yasg',
+    'channels',
+    'daphne'
 ]
 
 PROJECT_APPS = [
     'apps.movie',
+    'apps.movie_web',
     'apps.user',
 ]
 
@@ -64,10 +69,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,6 +87,8 @@ TEMPLATES = [
         },
     },
 ]
+
+ASGI_APPLICATION = 'core.asgi.application'
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
@@ -132,6 +142,8 @@ STATIC_URL = 'static/'
 
 MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
